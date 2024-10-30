@@ -92,4 +92,3 @@ class AddDataWin(QWidget):
                                        customer=customer, executor=executor, status=status)
         QMessageBox.information(self, "Инфо", answer)
         self.close()
-

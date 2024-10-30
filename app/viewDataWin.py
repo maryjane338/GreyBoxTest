@@ -14,7 +14,7 @@ class ViewDataWin(QWidget):
 
     def initUI(self):
         self.setWindowTitle("Выборки из базы данных")
-        self.setGeometry(100, 100, 1500, 500)
+        self.setGeometry(100, 100, 750, 500)
         self.query_label = QLabel("Выберите выборку:")
         self.query_combo = QComboBox()
         self.query_combo.addItem("Все заказы", "all_orders")
