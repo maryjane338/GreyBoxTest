@@ -31,8 +31,8 @@ class AddDataWin(QWidget):
         self.status_label = QLabel("Статус:")
         self.status_input = QComboBox()
         self.load_statuses()
-        add_button = QPushButton("Добавить заказ")
-        add_button.clicked.connect(self.add_order)
+        self.add_button = QPushButton("Добавить заказ")
+        self.add_button.clicked.connect(self.add_order)
         layout = QVBoxLayout()
         layout.addWidget(self.work_label)
         layout.addWidget(self.work_input)
@@ -46,7 +46,7 @@ class AddDataWin(QWidget):
         layout.addWidget(self.executor_input)
         layout.addWidget(self.status_label)
         layout.addWidget(self.status_input)
-        layout.addWidget(add_button)
+        layout.addWidget(self.add_button)
         self.setLayout(layout)
 
     def upload_editable_data(self):
