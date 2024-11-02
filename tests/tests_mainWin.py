@@ -1,5 +1,5 @@
 from pytestqt.plugin import qtbot
-from conftests import db_creation_removal, full_db
+from conftests import full_db
 from app.mainWin import MainWin
 from database.scripts.db import Data
 
