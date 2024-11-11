@@ -1,4 +1,5 @@
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QMessageBox
 from conftests import full_db
 from database.scripts.db import Data
 from app.addDataWin import AddDataWin
@@ -29,7 +30,7 @@ def test_add_order(full_db, qtbot):
     assert added_order[6] == 'Принят'
 
 
-def test_update_order(full_db, qtbot):
+def test_update_order(full_db, qtbot, mocker):
     db = Data("..\database\\temporary_full.db")
     win_view = ViewDataWin()
     win_view.show()
@@ -47,6 +48,7 @@ def test_update_order(full_db, qtbot):
     win.customer_input.setText('Пушкарёв Владислав')
     win.executor_input.setCurrentText('Сидоров')
     win.status_input.setCurrentText('Ожидание комплектующих')
+    mocker.patch.object(QMessageBox, 'information', return_value=QMessageBox.StandardButton.Ok)
     win.add_order()
 
     db.get_all_orders(column=None, fltr=None)
