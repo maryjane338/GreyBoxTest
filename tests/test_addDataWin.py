@@ -50,7 +50,7 @@ def test_update_order(full_db, qtbot, mocker):
     win.executor_input.setCurrentText('Сидоров')
     win.status_input.setCurrentText('Ожидание комплектующих')
     mocker.patch.object(QMessageBox, 'information', return_value=QMessageBox.StandardButton.Ok)
-    win.add_order()
+    win.add_button.click()
 
     db.get_all_orders(column=None, fltr=None)
     added_order = db.data[0]
