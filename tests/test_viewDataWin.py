@@ -34,5 +34,4 @@ def test_remove_data(view_creation, qtbot, mocker):
     mocker.patch.object(QMessageBox, 'exec', return_value=QMessageBox.StandardButton.Yes)
     mocker.patch.object(QMessageBox, 'information', return_value=QMessageBox.StandardButton.Ok)
     win.del_entry.click()
-    win.load_data()
     assert win.table.rowCount() == 4
