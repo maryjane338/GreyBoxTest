@@ -1,3 +1,4 @@
+from PyQt6.QtWidgets import QMessageBox
 from pytestqt.plugin import qtbot
 from conftests import view_creation
 from database.scripts.db import Data
@@ -24,12 +25,14 @@ def test_add_data(view_creation, qtbot):
     win.load_data()
     assert win.table.rowCount() == 7
 
-def test_remove_data(view_creation, qtbot):
+def test_remove_data(view_creation, qtbot, mocker):
     db = Data("..\database\\temporary_filter.db")
     win = ViewDataWin()
     win.show()
     qtbot.addWidget(win)
-    db.delete_order(id_order='4')
-    db.delete_order(id_order='5')
+    win.table.selectRow(3)
+    mocker.patch.object(QMessageBox, 'exec', return_value=QMessageBox.StandardButton.Yes)
+    mocker.patch.object(QMessageBox, 'information', return_value=QMessageBox.StandardButton.Ok)
+    win.del_entry.click()
     win.load_data()
-    assert win.table.rowCount() == 3
+    assert win.table.rowCount() == 4

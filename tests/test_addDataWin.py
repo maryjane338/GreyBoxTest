@@ -6,7 +6,7 @@ from app.addDataWin import AddDataWin
 from app.viewDataWin import ViewDataWin
 
 
-def test_add_order(full_db, qtbot):
+def test_add_order(full_db, qtbot, mocker):
     db = Data("..\database\\temporary_full.db")
     win = AddDataWin()
     win.show()
@@ -18,6 +18,7 @@ def test_add_order(full_db, qtbot):
     win.customer_input.setText('Пушкарёв Владислав')
     win.executor_input.setCurrentText('Иванов')
     win.status_input.setCurrentText('Принят')
+    mocker.patch.object(QMessageBox, 'information', return_value=QMessageBox.StandardButton.Ok)
     win.add_button.click()
 
     db.get_all_orders(column=None, fltr=None)
@@ -61,7 +62,7 @@ def test_update_order(full_db, qtbot, mocker):
     assert added_order[6] == 'Ожидание комплектующих'
 
 
-def test_invalid_data(full_db, qtbot):
+def test_invalid_data(full_db, qtbot, mocker):
     db = Data("..\database\\temporary_full.db")
     win = AddDataWin()
     win.show()
@@ -73,6 +74,7 @@ def test_invalid_data(full_db, qtbot):
     win.customer_input.setText('Пушкарёв Владислав')
     win.executor_input.setCurrentText('Иванов')
     win.status_input.setCurrentText('Принят')
+    mocker.patch.object(QMessageBox, 'information', return_value=QMessageBox.StandardButton.Ok)
     win.add_button.click()
 
     db.get_all_orders(column=None, fltr=None)
